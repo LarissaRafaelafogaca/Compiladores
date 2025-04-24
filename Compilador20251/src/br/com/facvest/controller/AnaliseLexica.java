@@ -11,7 +11,7 @@ public class AnaliseLexica {
         StringBuilder log = new StringBuilder();
         int numLinha = 0;
 
-        // Remove comentários de bloco (/* ... */), incluindo múltiplas linhas
+     
         codigoFonte = codigoFonte.replaceAll("(?s)/\\*.*?\\*/", "");
 
         String[] linhas = codigoFonte.split("\n");
@@ -19,7 +19,7 @@ public class AnaliseLexica {
         for (String linha : linhas) {
             numLinha++;
 
-            // Remove comentários de linha
+            
             if (linha.contains("//")) {
                 linha = linha.substring(0, linha.indexOf("//"));
             }
@@ -30,7 +30,7 @@ public class AnaliseLexica {
                 token = token.trim();
                 if (token.isEmpty()) continue;
 
-                // Tipos de token
+                
                 if (isInteger(token)) {
                     log.append("Linha ").append(numLinha).append(": Token(").append(token).append(", INTEIRO)\n");
                 } else if (isFloat(token)) {
@@ -80,7 +80,7 @@ public class AnaliseLexica {
         while (i < linha.length()) {
             char c = linha.charAt(i);
 
-            // Trata strings
+            
             if (c == '"') {
                 token.setLength(0);
                 token.append(c);
@@ -98,7 +98,7 @@ public class AnaliseLexica {
                 continue;
             }
 
-            // Verifica operadores compostos
+            
             if (i + 1 < linha.length()) {
                 String doisChar = "" + c + linha.charAt(i + 1);
                 if (opCompostosSet.contains(doisChar)) {
@@ -112,7 +112,7 @@ public class AnaliseLexica {
                 }
             }
 
-            // Verifica delimitadores ou operadores simples
+            
             if (Character.isWhitespace(c) || isDelimitadorOuOperador(c)) {
                 if (token.length() > 0) {
                     tokens.add(token.toString());
@@ -125,7 +125,7 @@ public class AnaliseLexica {
                 continue;
             }
 
-            // Continua montando token atual
+        
             token.append(c);
             i++;
         }
